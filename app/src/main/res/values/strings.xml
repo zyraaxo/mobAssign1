@@ -1,0 +1,6 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">My Application</string>
+    <string name="fa_phone">\uf095</string>
+    <string name="dialText">Editme</string>
+
+</resources>
