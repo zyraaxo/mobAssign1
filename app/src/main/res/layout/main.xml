@@ -137,10 +137,10 @@
             android:background="@drawable/round_button">
         </Button>
         <Button
-            android:id="@+id/clear"
+            android:id="@+id/hash"
 
             android:layout_width="70dp"
-            android:text="C"
+            android:text="#"
             android:textSize="30sp"
             android:layout_height="70dp"
             android:layout_margin="8dp"
@@ -161,6 +161,7 @@
             android:layout_column="1"
             android:background="@drawable/dial">
         </Button>
+
         <Button
             android:id="@+id/backspace"
             android:visibility="invisible"
@@ -169,6 +170,20 @@
             android:layout_height="50dp"
             android:layout_margin="20dp"
             android:background="@drawable/backspace">
+        </Button>
+        <Button
+            android:id="@+id/clear"
+            android:visibility="visible"
+            android:textSize="30sp"
+
+
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="-75dp"
+            android:layout_margin="20dp"
+            android:text="C"
+            android:background="@drawable/round_button">
+
         </Button>
 
     </GridLayout>
