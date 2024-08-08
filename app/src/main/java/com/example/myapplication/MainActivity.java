@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -41,6 +42,7 @@ public class MainActivity extends ComponentActivity {
         for (int id : buttonIds) {
             Button button = findViewById(id);
             numberButtons.add(button);
+            button.setTextColor(Color.WHITE);
         }
 
         for (Button button : numberButtons) {
@@ -48,6 +50,7 @@ public class MainActivity extends ComponentActivity {
                 String buttonText = ((Button) v).getText().toString();
                 dialText.append(buttonText);
                 updateBackspaceVisibility();
+
             });
         }
 
@@ -68,7 +71,6 @@ public class MainActivity extends ComponentActivity {
 
         mPhone.setOnClickListener(v -> makeCall());
 
-        // Handle incoming ACTION_DIAL intent
         Intent intent = getIntent();
         if (Intent.ACTION_DIAL.equals(intent.getAction())) {
             Uri uri = intent.getData();
@@ -92,8 +94,13 @@ public class MainActivity extends ComponentActivity {
     private void updateBackspaceVisibility() {
         if (dialText.getText().length() > 0) {
             backspaceButton.setVisibility(View.VISIBLE);
+            dialText.setVisibility(View.VISIBLE);
+
+
         } else {
             backspaceButton.setVisibility(View.GONE);
+            dialText.setVisibility(View.GONE);
+
         }
     }
 
