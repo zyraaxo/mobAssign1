@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.ComponentActivity;
@@ -20,9 +21,10 @@ import androidx.core.content.ContextCompat;
 import java.util.ArrayList;
 
 public class MainActivity extends ComponentActivity {
-    private EditText dialText;
+    private TextView dialText;
     private Button backspaceButton;
     private static final int REQUEST_CALL_PERMISSION = 1;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class MainActivity extends ComponentActivity {
         Button clearButton = findViewById(R.id.clear);
         backspaceButton = findViewById(R.id.backspace);
         Button mPhone = findViewById(R.id.phone);
+        intentFunction();
 
         int[] buttonIds = {
                 R.id.one, R.id.two, R.id.three, R.id.four, R.id.five,
@@ -67,22 +70,15 @@ public class MainActivity extends ComponentActivity {
             }
         });
 
+
         updateBackspaceVisibility();
 
         mPhone.setOnClickListener(v -> makeCall());
-
-        Intent intent = getIntent();
-        if (Intent.ACTION_DIAL.equals(intent.getAction())) {
-            Uri uri = intent.getData();
-            if (uri != null) {
-                String number = uri.getSchemeSpecificPart();
-                dialText.setText(number);
-            }
-        }
-
         if (savedInstanceState != null) {
             dialText.setText(savedInstanceState.getString("dialText"));
         }
+
+
     }
 
     @Override
@@ -90,6 +86,17 @@ public class MainActivity extends ComponentActivity {
         super.onSaveInstanceState(outState);
         outState.putString("dialText", dialText.getText().toString());
     }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        String restoredText = savedInstanceState.getString("dialText");
+        if (restoredText != null) {
+            dialText.setText(restoredText);
+            updateBackspaceVisibility(); // Update the backspace button visibility
+        }
+    }
+
 
     private void updateBackspaceVisibility() {
         if (dialText.getText().length() > 0) {
@@ -141,5 +148,19 @@ public class MainActivity extends ComponentActivity {
         } catch (Exception e) {
             Toast.makeText(this, "An error occurred: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void intentFunction(){
+        Intent intent = getIntent();
+        if (Intent.ACTION_DIAL.equals(intent.getAction())) {
+            Uri uri = intent.getData();
+            if (uri != null) {
+                String number = uri.getSchemeSpecificPart();
+                dialText.setText(number);
+            }
+        }
+
+
+
     }
 }

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:background="@color/black"
-    android:weightSum="3">
+    android:weightSum="2">
 
     <EditText
         android:id="@+id/dialText"
@@ -14,6 +14,8 @@
         android:layout_marginEnd="50dp"
         android:layout_marginStart="35dp"
         android:layout_weight="1"
+        android:freezesText="true"
+
         android:hint="Phone No."
         android:inputType="phone"
         android:padding="10dp"
